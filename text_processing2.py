@@ -28,9 +28,20 @@ def digits_to_words(input_string):
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
+    num_list = [str(i) for i in range(10)]
+    eng_list = ['zero','one','two','three','four','five','six','seven','eight','nine']
+    mydict = {i:j for i,j in zip(num_list,eng_list)}
+    only_int=''
+    for i in input_string:
+        if i.isdigit():
+            only_int+=i
+
+    digit_string = ' '.join([mydict[num] for num in only_int])
     return digit_string
 
+# print(digits_to_words( "Zip Code: 19104"))
+# print(len(digits_to_words( "Zip Code:")))
+# print(digits_to_words( "Pi is 3.1415..."))
 
 """
 컴퓨터 프로그래밍에 많은 명명 규칙이 있지만, 두 규칙이 특히 흔히 쓰입니다. 
@@ -38,7 +49,6 @@ def digits_to_words(input_string):
 두번째로는, 변수 이름을 대소문자 구별해 구분자 (delimiter)없이 쓰는 경우가 있습니다. 
 이 두번째의 경우에는 첫번째 단어는 소문자로, 그 후에 오는 단어들의 첫번째 글자들은 대문자로 쓰입니다 (ex. camelCaseVariable). 
 """
-
 
 def to_camel_case(underscore_str):
     """
@@ -64,5 +74,14 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+    if '_' not in underscore_str:
+        return underscore_str
+
+    c_list = [u.lower() for u in underscore_str.split('_') if u!='']
+    camelcase_str = ''.join(c_list[:1] + [c.capitalize() for c in c_list[1:]])
     return camelcase_str
+
+# print(to_camel_case("to_camel_case"))
+# print(to_camel_case("__EXAMPLE__NAME__"))
+# print(len(to_camel_case("_____")))
+# print(to_camel_case("alreadyCamel"))
